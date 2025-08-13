@@ -1,24 +1,22 @@
-# HCL - HashiCorp Configuration Language - Fiche Pédagogique
-
-## Vue d'ensemble
+# HCL - HashiCorp Configuration Language
 
 HCL (HashiCorp Configuration Language) est un langage de configuration déclaratif développé par HashiCorp. Il s'agit d'une version simplifiée et plus lisible du JSON, spécialement conçue pour la configuration d'infrastructure et la lisibilité humaine.
 
-## Caractéristiques Fondamentales
+## Caractéristiques fondamentales
 
-### Philosophie du Langage
+### Philosophie du langage
 - **Lisibilité** : Syntaxe proche du langage naturel
 - **Simplicité** : Structure claire et intuitive
 - **Expressivité** : Support des expressions complexes
 - **Compatibilité** : Peut lire et traiter JSON natif
 - **Interactivité** : Support des arguments en ligne de commande
 
-### Point d'Entrée
+### Point d'entrée
 Toute configuration Terraform commence par un fichier `main.tf` qui sert de point d'entrée principal pour la configuration.
 
-## Structure Syntaxique
+## Structure de la syntaxe
 
-### Anatomie d'un Block
+### Anatomie d'un block
 ```hcl
 <BLOCK_TYPE> "<LABEL_1>" "<LABEL_2>" {
   <ARGUMENT_NAME> = <ARGUMENT_VALUE>
@@ -36,7 +34,7 @@ Toute configuration Terraform commence par un fichier `main.tf` qui sert de poin
 3. **ARGUMENTS** : Paires clé-valeur de configuration
 4. **NESTED_BLOCKS** : Blocs imbriqués pour configuration avancée
 
-### Exemple Concret
+### Exemple
 ```hcl
 resource "aws_instance" "web_server" {
   ami           = "ami-0abcdef1234567890"
@@ -64,7 +62,7 @@ resource "aws_instance" "web_server" {
 }
 ```
 
-## Types de Blocks Terraform
+## Types de Blocks
 
 ### 1. Block Resource
 ```hcl
@@ -200,9 +198,9 @@ locals {
 }
 ```
 
-## Système de Référencement
+## Système de référencement
 
-### Référencement de Ressources
+### Référencement de ressources
 ```hcl
 <TYPE_RESSOURCE>.<LABEL>.<ATTRIBUT>
 ```
@@ -269,9 +267,9 @@ resource "aws_instance" "app" {
 }
 ```
 
-## Types de Données et Valeurs
+## Types de données et valeurs
 
-### Types Primitifs
+### Types primitifs
 ```hcl
 # String
 server_name = "web-server-01"
@@ -306,7 +304,7 @@ instance_types = {
 }
 ```
 
-### Objets Complexes
+### Objets complexes
 ```hcl
 server_config = {
   name     = "web-server"
@@ -317,9 +315,9 @@ server_config = {
 }
 ```
 
-## Expressions et Fonctions
+## Expressions et fonctions
 
-### Expressions Conditionnelles
+### Expressions conditionnelles
 ```hcl
 instance_type = var.environment == "production" ? "t3.large" : "t2.micro"
 
@@ -332,7 +330,7 @@ tags = var.environment == "production" ? {
 }
 ```
 
-### Fonctions Intégrées
+### Fonctions intégrées
 ```hcl
 # Fonctions de string
 upper_name = upper(var.project_name)
@@ -370,9 +368,9 @@ is_large_instance = var.instance_size >= 4
 is_valid_env     = contains(["dev", "stage", "prod"], var.environment)
 ```
 
-## Blocks Imbriqués et Configurations Complexes
+## Blocks imbriqués et configurations
 
-### Exemple avec Blocks Imbriqués
+### Exemple avec blocks imbriqués
 ```hcl
 resource "aws_launch_template" "web" {
   name_prefix   = "${var.project_name}-"
@@ -424,7 +422,7 @@ resource "aws_launch_template" "web" {
 }
 ```
 
-### Configuration avec Listes d'Objets
+### Configuration avec listes d'objets
 ```hcl
 variable "security_group_rules" {
   type = list(object({
@@ -476,9 +474,9 @@ resource "aws_security_group" "web" {
 }
 ```
 
-## Commentaires et Documentation
+## Commentaires et documentation
 
-### Types de Commentaires
+### Types de commentaires
 ```hcl
 # Commentaire sur une ligne
 
@@ -509,9 +507,9 @@ resource "aws_instance" "web" {
 }
 ```
 
-## Aspects Sécurité et Sensibilité
+## Aspects sécurité et sensibilité
 
-### Sensibilité à la Casse (Case Sensitive)
+### Sensibilité à la casse
 HCL est **sensible à la casse**, ce qui signifie que `myVariable`, `MyVariable` et `MYVARIABLE` sont des identifiants différents.
 
 ```hcl
@@ -540,7 +538,7 @@ resource "aws_db_instance" "main" {
 - Les attributs : `.public_ip` ≠ `.Public_IP`
 - Les variables : `var.project_name` ≠ `var.Project_Name`
 
-### Variables d'Environnement TF_VAR_
+### Variables d'environnement TF_VAR_
 
 **Convention TF_VAR_** : Terraform reconnaît automatiquement les variables d'environnement préfixées par `TF_VAR_`.
 
@@ -667,7 +665,7 @@ output "database_password" {
 - Non affichée dans `terraform plan` ou `terraform apply`
 - Masquée dans `terraform output` sauf avec `-raw`
 
-### Exemples Pratiques de Sécurisation
+### Exemples pratiques de sécurisation
 
 ```bash
 # Script de déploiement sécurisé
@@ -690,9 +688,9 @@ unset TF_VAR_database_password
 unset TF_VAR_api_secret_key
 ```
 
-## Bonnes Pratiques HCL
+## Bonnes pratiques HCL
 
-### Organisation du Code
+### Organisation du code
 ```hcl
 # 1. Blocks terraform et required_providers en premier
 terraform {
@@ -736,7 +734,7 @@ output "vpc_id" {
 }
 ```
 
-### Formatage et Style
+### Formatage et style
 ```hcl
 # Alignement des = pour la lisibilité
 resource "aws_instance" "web" {
